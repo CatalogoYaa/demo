@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo Oficial | Nombre de tu Marca</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="icon" href="img/catalogo.ico">
+    <style>
+       
+/* Variables y Estilos Generales */
+:root {
+    --brand-color: #007bff; 
+    --whatsapp-color: #25D366;
+    --bg-color: #f4f7f9; 
+    --card-color: #ffffff;
+    --text-dark: #212529;
+    --text-grey: #6c757d;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative; 
+}
+
+header {
+    text-align: center;
+    padding: 30px 0;
+    border-bottom: 3px solid var(--brand-color);
+    margin-bottom: 40px;
+    background-color: var(--card-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+    margin: 5px 0;
+    font-size: 2.8em;
+    font-weight: 800;
+    font-family: 'Poppins', sans-serif;
+    color: var(--brand-color);
+}
+
+.welcome-box {
+    background-color: darkcyan;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+/* ========================================= */
+/* CARRUSEL DE PRODUCTOS                     */
+/* ========================================= */
+.carousel-wrapper {
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+
+.product-grid {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.4s ease-in-out;
+}
+
+/* Desktop: 3 tarjetas visibles */
+.product-card {
+    flex: 0 0 calc((1000px - 2 * 30px) / 3);
+    max-width: calc((1000px - 2 * 30px) / 3);
+    background-color: var(--card-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Botones de navegación del carrusel */
+.main-carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 15px 10px;
+    cursor: pointer;
+    z-index: 20;
+    font-size: 1.5em;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+.main-carousel-button:hover {
+    background: var(--brand-color);
+}
+
+.prev-product-button {
+    left: -40px;
+}
+
+.next-product-button {
+    right: -40px;
+}
+
+/* ========================================= */
+/* MEDIA QUERIES - RESPONSIVIDAD            */
+/* ========================================= */
+
+/* Tablet: 2 tarjetas visibles */
+@media (max-width: 1060px) {
+    .product-card {
+        flex: 0 0 calc((100% - 30px) / 2);
+        max-width: calc((100% - 30px) / 2);
+    }
+    /* Ajuste de botones: más dentro del carrusel */
+    .prev-product-button { left: 5px; top: 60%; }
+    .next-product-button { right: 5px; top: 60%; }
+
+    .product-name { font-size: 1.3em; }
+    .product-features li, .product-price-list { font-size: 0.95em; }
+}
+
+/* Móvil: 1 tarjeta visible */
+@media (max-width: 600px) {
+    .container { padding: 10px; }
+
+    .product-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+
+    /* Botones mucho más abajo y visibles */
+    .prev-product-button { left: 10px; top: 70%; }
+    .next-product-button { right: 10px; top: 70%; }
+
+    .product-content { padding: 15px; }
+    .product-image-container { height: 200px; }
+    .product-name { font-size: 1.2em; }
+    .product-features li { font-size: 0.9em; }
+    .product-price-list { font-size: 1.1em; }
+
+    .whatsapp-button { 
+        font-size: 1em;
+        padding: 10px 15px;
+        white-space: normal;
+    }
+
+    .main-carousel-button {
+        padding: 10px 5px;
+        font-size: 1.2em;
+    }
+}
+
+/* ========================================= */
+/* ESTILOS INTERNOS DE TARJETA              */
+/* ========================================= */
+.product-image-container {
+    width: 100%;
+    height: 50%; 
+    overflow: hidden;
+    border-bottom: 1px solid #eee;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.product-content {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.product-features {
+    list-style: disc; 
+    padding-left: 20px;
+    margin: 0 0 15px 0; 
+    color: var(--text-grey);
+    flex-grow: 1;
+}
+
+.product-features li {
+    margin-bottom: 8px; 
+    font-size: 0.95em;
+    line-height: 1.3;
+}
+
+.product-price-list {
+    font-size: 1.2em; 
+    font-weight: 700;
+    color: var(--brand-color);
+    list-style: none;
+    margin-left: -20px;
+    margin-top: 10px;
+}
+
+.whatsapp-row {
+    margin-top: 15px;
+    border-top: 1px solid #eee; 
+    padding-top: 15px;
+    text-align: center;
+}
+
+.whatsapp-button {
+    display: block;
+    width: 85%; 
+    padding: 12px 15px; 
+    background-color: var(--whatsapp-color); 
+    color: white; 
+    text-decoration: none; 
+    border-radius: 8px; 
+    font-weight: 600; 
+    font-size: 1.1em;
+    transition: background-color 0.3s ease; 
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    color: var(--text-grey);
+    font-size: 0.9em;
+    margin-top: 40px;
+    border-top: 1px solid #ddd;
+}
+@media (max-width: 600px) {
+  .product-image-container {
+        max-height: 350px;
+    }
+}
+
+
+.hero-header {
+    background-color: darkblue; /* color premium */
+    padding: 40px 20px;
+    text-align: center;
+    color: white;
+    border-radius: 0 0 12px 12px; /* opcional, queda muy lindo */
+}
+.hero-header h1 {
+    color: white;
+}
+
+.hero-header p {
+    color: white;
+}
+/* 🚀 BLOQUE CORREGIDO: OPTIMIZACIÓN DE ALTURA PARA MÓVILES PEQUEÑOS (< 400px) */
+@media (max-width: 440px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+    .welcome-box {
+        font-size: 1rem;
+    }
+    .hero-header {
+        padding: 5px 20px;
+    }
+    /* 1. Reducción de la altura de la imagen */
+    .product-image-container {
+        height: 400px; 
+    }
+    
+    /* 2. Scroll interno para la lista de características */
+    .product-features {
+        max-height: 180px; /* Altura máxima fija */
+        flex-grow: 0; 
+        padding-right: 5px; 
+        margin-bottom: 5px;
+    }
+    
+    /* Estilos más compactos para el contenedor de contenido */
+    .product-content { 
+        padding: 10px;
+    }
+    
+    /* Reducción de fuentes para ahorrar espacio */
+    .product-name { 
+        font-size: 1.1em;
+        margin-bottom: 5px;
+    }
+    
+    .product-features li, .product-price-list { 
+        font-size: 0.85em; 
+        margin-bottom: 3px;
+    }
+    
+    .whatsapp-row {
+        padding-top: 8px;
+        margin-top: 8px;
+    }
+    
+    .whatsapp-button { 
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
+
+    /* Estilo de la barra de scroll (opcional) */
+    .product-features::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .product-features::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 5px;
+    }
+    
+}
+@media (max-width: 390px) {
+   header h1 {
+        font-size: 1.3rem;
+   }
+   .hero-header {
+        padding: 20px 20px; 
+   }
+}
+</style>
+
+</head>
+<body onload="updateButtonState()">
+    
+    <script>const WHATSAPP_NUMBER = "2284714027";</script> 
+
+    <div class="container">
+        <header class="hero-header">
+    <h1>Tu Marca Aquí</h1>
+    <p>Catálogo Oficial. Encontrá productos exclusivos y hacé tu pedido directo por WhatsApp.</p>
+</header>
+
+        <div class="welcome-box">
+            20 artículos disponibles. Consultá stock y precios al instante.
+        </div>
+        
+        <div class="carousel-container-outer">
+            <button class="main-carousel-button prev-product-button" id="prevButton" onclick="scrollCarousel(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="main-carousel-button next-product-button" id="nextButton" onclick="scrollCarousel(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <div class="carousel-wrapper">
+                <div class="product-grid" id="productCarousel">
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/set-regalo.png" alt="Set Regalo Esencial" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">1. Set de Regalo "Esencial"</h2>
+                            <ul class="product-features">
+                                <li>**Cuero Genuino** de alta durabilidad y acabado suave.</li>
+                                <li>Incluye Billetera + Llavero a juego.</li>
+                                <li>Grabado láser personalizado **gratuito**.</li>
+                                <li>Presentación en caja de lujo.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$45.99</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('1. Set de Regalo Esencial', '45.99'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/vela-soja-artesanal.png" alt="Vela Artesanal" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">2. Vela de Soja Artesanal</h2>
+                            <ul class="product-features">
+                                <li>**100% Cera de Soja** natural, ecológica y no tóxica.</li>
+                                <li>Aroma a Vainilla y Sándalo.</li>
+                                <li>Duración de combustión de más de **50 horas**.</li>
+                                <li>Envase de vidrio reciclado.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$18.50</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('2. Vela de Soja Artesanal', '18.50'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/infusion-frutos-rojos.png" alt="Infusión Frutos" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">3. Infusión de Frutos Rojos</h2>
+                            <ul class="product-features">
+                                <li>Mezcla natural de Hibiscus, Arándanos y Fresas.</li>
+                                <li>**Sin Cafeína** y sin azúcares añadidos.</li>
+                                <li>Presentación de 150 gramos.</li>
+                                <li>Empaque 100% biodegradable.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$9.00</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('3. Infusión de Frutos Rojos', '9.00'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/bolsa-lona-ecologica.png" alt="Producto 4" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">4. Bolsa de Lona Ecológica</h2>
+                            <ul class="product-features">
+                                <li>Lona 100% algodón orgánico, resistente.</li>
+                                <li>Asas reforzadas para mayor capacidad.</li>
+                                <li>Diseño exclusivo y minimalista.</li>
+                                <li>Ideal para el uso diario.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$12.50</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('4. Bolsa de Lona Ecológica', '12.50'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/crema-corporal-hidratante.png" alt="Producto 5" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">5. Crema Corporal Hidratante</h2>
+                            <ul class="product-features">
+                                <li>Fórmula vegana con manteca de karité.</li>
+                                <li>Sin parabenos ni sulfatos.</li>
+                                <li>Aroma suave a rosas y vainilla.</li>
+                                <li>Envase de 250ml.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$25.00</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('5. Crema Corporal Hidratante', '25.00'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/jabon-artesanal-lavanda.png" alt="Producto 6" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">6. Jabón Artesanal de Lavanda</h2>
+                            <ul class="product-features">
+                                <li>Hecho a mano con aceites esenciales puros.</li>
+                                <li>Propiedades relajantes y nutritivas.</li>
+                                <li>Ideal para pieles sensibles.</li>
+                                <li>Peso: 100 gramos.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$7.99</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('6. Jabón Artesanal de Lavanda', '7.99'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/taza-ceramica-aurora.png" alt="Producto 7" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">7. Taza de Cerámica "Aurora"</h2>
+                            <ul class="product-features">
+                                <li>Cerámica de alta calidad, apta para microondas.</li>
+                                <li>Diseño único con acabado brillante.</li>
+                                <li>Capacidad: 350 ml.</li>
+                                <li>Hecha a mano por artesanos.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$15.00</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('7. Taza de Cerámica Aurora', '15.00'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/marco-fotos-madera.png" alt="Producto 8" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">8. Marco de Fotos de Madera Reciclada</h2>
+                            <ul class="product-features">
+                                <li>Madera de pino recuperada.</li>
+                                <li>Acabado rústico natural.</li>
+                                <li>Tamaño para fotos de 10x15 cm.</li>
+                                <li>Incluye soporte de mesa.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$22.00</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('8. Marco de Fotos de Madera Reciclada', '22.00'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/cafe-organico-gourmet-250g.png" alt="Producto 9" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">9. Café Orgánico Gourmet (250g)</h2>
+                            <ul class="product-features">
+                                <li>Granos 100% Arábica de origen ético.</li>
+                                <li>Tostado medio, notas de chocolate y nuez.</li>
+                                <li>Certificación orgánica.</li>
+                                <li>Envase biodegradable.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$14.99</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('9. Café Orgánico Gourmet', '14.99'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/libreta-diseno-exclusivo.png" alt="Producto 10" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">10. Libreta de Diseño Exclusivo</h2>
+                            <ul class="product-features">
+                                <li>Tapa dura con ilustración original.</li>
+                                <li>160 páginas de papel de alta calidad.</li>
+                                <li>Tamaño A5.</li>
+                                <li>Ideal para apuntes.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$11.50</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('10. Libreta de Diseño Exclusivo', '11.50'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/infusor-te-inoxidable-2.png" alt="Producto 11" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">11. Infusor de Té Inoxidable</h2>
+                            <ul class="product-features">
+                                <li>Acero inoxidable de grado alimenticio.</li>
+                                <li>Diseño de malla fina, sin residuos.</li>
+                                <li>Fácil de limpiar.</li>
+                                <li>Compatible con tazas y teteras.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$6.99</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('11. Infusor de Té Inoxidable', '6.99'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/vaso-termico-doble-pared.png" alt="Producto 12" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">12. Vaso Térmico Doble Pared</h2>
+                            <ul class="product-features">
+                                <li>Acero inoxidable con aislamiento al vacío.</li>
+                                <li>Mantiene caliente por 6h y frío por 12h.</li>
+                                <li>Capacidad: 400 ml.</li>
+                                <li>Tapa antiderrame.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$29.99</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('12. Vaso Térmico Doble Pared', '29.99'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/set-mini-plantas-suculentas.png" alt="Producto 13" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">13. Set de Mini Plantas Suculentas</h2>
+                            <ul class="product-features">
+                                <li>3 variedades en macetas de cerámica.</li>
+                                <li>Fáciles de cuidar, ideales para interior.</li>
+                                <li>Incluye guía de cuidado.</li>
+                                <li>Regalo perfecto.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$30.00</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('13. Set de Mini Plantas Suculentas', '30.00'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/humidificador-ultrasonico.png" alt="Producto 14" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">14. Humidificador Ultrasónico</h2>
+                            <ul class="product-features">
+                                <li>Tecnología ultrasónica silenciosa.</li>
+                                <li>Capacidad: 200 ml, 6 horas de uso.</li>
+                                <li>Luz LED ambiental.</li>
+                                <li>Ideal para oficina o dormitorio.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$39.00</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('14. Humidificador Ultrasónico', '39.00'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/cuaderno-bambu-ecologico.png" alt="Producto 15" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">15. Cuaderno de Bambú Ecológico</h2>
+                            <ul class="product-features">
+                                <li>Tapa de bambú natural.</li>
+                                <li>120 hojas recicladas con líneas.</li>
+                                <li>Anillo metálico resistente.</li>
+                                <li>Compromiso con el medio ambiente.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$10.00</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('15. Cuaderno de Bambú Ecológico', '10.00'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/set-utensilios-cocina.png" alt="Producto 16" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">16. Set de Utensilios de Cocina</h2>
+                            <ul class="product-features">
+                                <li>5 piezas de bambú natural, antiadherentes.</li>
+                                <li>Resistentes al calor.</li>
+                                <li>Incluye espátula, cuchara, tenedor, etc.</li>
+                                <li>Ecológico y duradero.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$20.00</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('16. Set de Utensilios de Cocina', '20.00'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/botella-cristal-funda.png" alt="Producto 17" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">17. Botella de Cristal con Funda</h2>
+                            <ul class="product-features">
+                                <li>Cristal borosilicato resistente.</li>
+                                <li>Funda de silicona protectora.</li>
+                                <li>Capacidad: 550 ml.</li>
+                                <li>Reutilizable y libre de BPA.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$17.50</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('17. Botella de Cristal con Funda', '17.50'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/collar-macrame-piedra.png" alt="Producto 18" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">18. Collar de Macramé con Piedra</h2>
+                            <ul class="product-features">
+                                <li>Diseño artesanal tejido a mano.</li>
+                                <li>Piedra natural (Ej. Amatista).</li>
+                                <li>Ajustable en longitud.</li>
+                                <li>Estilo bohemio y natural.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$35.00</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('18. Collar de Macramé con Piedra', '35.00'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/set-especias-gourmet-organico.png" alt="Producto 19" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">19. Set de Especias Gourmet (Orgánico)</h2>
+                            <ul class="product-features">
+                                <li>4 frascos de especias orgánicas seleccionadas.</li>
+                                <li>Curry, Pimentón Ahumado, Orégano y Pimienta.</li>
+                                <li>Ideal para regalo a cocineros.</li>
+                                <li>Máxima frescura y sabor.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$28.00</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('19. Set de Especias Gourmet', '28.00'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image-container">
+                            <img src="/img/llavero-cuero-iniciales.png" alt="Producto 20" class="product-image">
+                        </div>
+                        <div class="product-content">
+                            <h2 class="product-name">20. Llavero de Cuero con Iniciales</h2>
+                            <ul class="product-features">
+                                <li>Cuero natural, disponible en 3 colores.</li>
+                                <li>Personalización de iniciales grabadas.</li>
+                                <li>Anilla metálica resistente.</li>
+                                <li>Diseño minimalista y elegante.</li>
+                                <li class="product-price-list">Precio: <span class="product-price">$15.99</span></li>
+                            </ul>
+                            <div class="whatsapp-row">
+                                <a href="#" class="whatsapp-button" onclick="sendWhatsAppMessage('20. Llavero de Cuero con Iniciales', '15.99'); return false;">
+                                    <i class="fab fa-whatsapp"></i> Consultar por WhatsApp
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Tu Marca Aquí. Todos los derechos reservados. Pedidos rápidos por WhatsApp.</p>
+    </footer>
+
+    <script>
+        const carousel = document.getElementById('productCarousel');
+        const prevButton = document.getElementById('prevButton');
+        const nextButton = document.getElementById('nextButton');
+        const cards = document.querySelectorAll('.product-card');
+        const numCards = cards.length;
+        let currentIndex = 0; 
+        const GAP = 30; 
+        
+        function getItemsPerView() {
+            if (window.innerWidth <= 600) return 1;
+            if (window.innerWidth <= 1060) return 2;
+            return 3;
+        }
+
+        function scrollCarousel(direction) {
+            const itemsPerView = getItemsPerView();
+            let newIndex = currentIndex + (direction * itemsPerView);
+            
+            // 1. Limitar el índice
+            if (newIndex < 0) {
+                newIndex = 0;
+            } else if (newIndex >= numCards) {
+                // Al final, nos aseguramos de que el último elemento visible sea el último producto.
+                newIndex = numCards - itemsPerView;
+            }
+            
+            currentIndex = newIndex;
+            updateCarouselPosition();
+            updateButtonState();
+        }
+
+        function updateCarouselPosition() {
+            if (numCards === 0) return;
+            
+            const cardWidth = cards[0].offsetWidth;
+            const offset = currentIndex * (cardWidth + GAP);
+            
+            carousel.style.transform = `translateX(-${offset}px)`;
+        }
+
+        function updateButtonState() {
+            const itemsPerView = getItemsPerView();
+            // maxScrolls representa el índice inicial de la última vista completa/parcial
+            const maxScrolls = numCards - itemsPerView; 
+
+            if (numCards <= itemsPerView) {
+                prevButton.classList.add('disabled');
+                nextButton.classList.add('disabled');
+            } else {
+                prevButton.classList.toggle('disabled', currentIndex <= 0);
+                nextButton.classList.toggle('disabled', currentIndex >= maxScrolls);
+            }
+        }
+        
+        window.addEventListener('resize', () => {
+            currentIndex = 0;
+            updateCarouselPosition();
+            updateButtonState();
+        });
+
+        window.onload = function() {
+            updateCarouselPosition();
+            updateButtonState();
+        };
+
+
+        function sendWhatsAppMessage(productName, productPrice) {
+            const message = `¡Hola! Me gustaría consultar más sobre el producto "${productName}" (Precio: $${productPrice}). Por favor, ¿podrían confirmarme el stock y los métodos de pago?`;
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            window.open(whatsappURL, '_blank');
+        }
+    </script>
+</body>
+</html>
